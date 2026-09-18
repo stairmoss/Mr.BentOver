@@ -1,5 +1,5 @@
 from Gif_prediction import analyze_conversation
-
+from shared import GIF
 conversation = [
                {
                  "username" : "Karthik",
@@ -28,14 +28,15 @@ while True:
     
     if user_input == "$Bentover":
          print("Mr.BentOver ready to cook")
-         show_history()
          
          recent_msg = conversation[-4:]
          show_history()
+         
         
          try:
             gif_search = analyze_conversation(recent_msg)
             print("GIF search phrase:",gif_search)
+            print("GIF URL:",GIF(gif_search))
          except Exception as e:
             print(f"Error occurred while analyzing conversation: {e}")
             

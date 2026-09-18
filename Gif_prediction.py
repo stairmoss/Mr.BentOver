@@ -82,3 +82,5 @@ def analyze_conversation(conversation):
 if __name__ == "__main__":
     result = analyze_conversation(conversation)
     print("Ai GIF search phrase :", result)
+    
+  
