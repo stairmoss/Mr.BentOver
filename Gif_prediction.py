@@ -1,0 +1,84 @@
+import os
+import json
+import requests
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+API_KEY = os.getenv("HACKCLUB_API_KEY")
+
+API_URL = "https://ai.hackclub.com/proxy/v1/chat/completions"
+
+MODEL = "qwen/qwen3-32b" 
+
+conversation = [
+    {
+        "username": "Karthik",
+        "content": "Bro, exam tomorrow and I haven't studied."
+    },
+    {
+        "username": "Thejus",
+        "content": "We're cooked 💀"
+    }
+]
+
+def format_conversation(conversation):
+    lines = []
+
+    for user_input  in conversation:
+        username = user_input["username"]
+        content = user_input["content"]
+
+        line = f"{username}: {content}"
+
+        lines.append(line)
+
+    return "\n".join(lines)
+
+
+     
+def analyze_conversation(conversation):
+    conversation_text = format_conversation(conversation)
+
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    data = {
+        "model": MODEL,
+        "messages": [
+            {
+                "role": "system",
+                "content": "You are Mr. Bentover, a funny Discord reaction bot. Return ONLY a short search phrase for a funny GIF matching the chat. No explanation, no punctuation."
+            },
+            {
+                "role": "user",
+                "content": conversation_text
+            }
+        ]
+    }
+
+    response = requests.post(
+        API_URL,
+        headers=headers,
+        json=data,
+        timeout=60
+    )
+
+    response.raise_for_status()
+    result = response.json()
+
+    content = result["choices"][0]["message"]["content"]
+    
+    # Safety check: if AI returns None or empty text, return a fallback
+    if not content:
+        return "funny panic reaction"
+
+    return content.strip()
+ 
+ 
+if __name__ == "__main__":
+    result = analyze_conversation(conversation)
+    print("Ai GIF search phrase :", result)

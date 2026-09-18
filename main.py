@@ -1,3 +1,4 @@
+from Gif_prediction import analyze_conversation
 
 conversation = [
                {
@@ -6,23 +7,41 @@ conversation = [
                },
               
  ]
+
+def show_history():
+    print("\n--- Recent messages ---")
+
+    for message in conversation[-4:]:
+        print(f'{message["username"]}: {message["content"]}')
+
+    print("-----------------------\n")
+    
+    
 while True: 
     user = input("type our username :")
     user_input = input("Type your message  : ")
+                                                      
     
-  
-    
-    def show_history(user_input):
-        for user_input in conversation[-4:]:   
-                 print(f"{user_input["username"]} :  {user_input["content"]}")                                                 
-    if user_input == "$Bentover":
-     print("Mr.BentOver ready to cook")
-     show_history(user_input)
-    elif user_input == "$quit":
+ 
+    if user_input == "$quit":
         break
     
+    if user_input == "$Bentover":
+         print("Mr.BentOver ready to cook")
+         show_history()
+         
+         recent_msg = conversation[-4:]
+         show_history()
+        
+         try:
+            gif_search = analyze_conversation(recent_msg)
+            print("GIF search phrase:",gif_search)
+         except Exception as e:
+            print(f"Error occurred while analyzing conversation: {e}")
+            
+         continue
+
     conversation.append({"username" : user, "content" : user_input})
         
 
 
-show_history()
