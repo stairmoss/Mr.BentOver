@@ -1,5 +1,6 @@
 import os
 import requests 
+from Bot import history
 from dotenv import load_dotenv
 
 load_dotenv()

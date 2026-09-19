@@ -1,7 +1,7 @@
 import os
 import json
 import requests
-
+from Bot import history
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -23,10 +23,10 @@ conversation = [
     }
 ]
 
-def format_conversation(conversation):
+def format_conversation(history):
     lines = []
 
-    for user_input  in conversation:
+    for user_input  in history:
         username = user_input["username"]
         content = user_input["content"]
 
@@ -38,8 +38,8 @@ def format_conversation(conversation):
 
 
      
-def analyze_conversation(conversation):
-    conversation_text = format_conversation(conversation)
+def analyze_conversation(history):
+    conversation_text = format_conversation(history)
 
     headers = {
         "Authorization": f"Bearer {API_KEY}",
