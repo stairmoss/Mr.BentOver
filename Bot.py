@@ -27,4 +27,18 @@ async def on_message(message):
             history.append({"username":msg.author.name, "content": msg.content})
         
         history.reverse()
-        await message.channel.send(GIF(gif_url)) 
+        
+        try:
+            
+            search_phrase = analyze_conversation(history)
+
+            
+            gif_url = GIF(search_phrase)
+
+            
+            await message.channel.send(gif_url)
+
+        except Exception as error:
+            print("Error running $Bentover:", error)
+
+client.run(os.getenv("DISCORD_BOT_TOKEN:"))
