@@ -1,4 +1,5 @@
 import os
+import random
 import requests 
 from dotenv import load_dotenv
 
@@ -8,6 +9,7 @@ API_KEY = os.getenv("GIPHY_API_KEY")
 API_URL = "https://api.giphy.com/v1/gifs/search"
 
 def get_gif(query):
+    random_offset = random.randint(0, 15)
     params = {
         "api_key": API_KEY,
         "q": query,
