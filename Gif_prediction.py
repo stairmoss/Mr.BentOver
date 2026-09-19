@@ -1,7 +1,6 @@
 import os
 import json
 import requests
-from Bot import history
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -71,8 +70,7 @@ def analyze_conversation(history):
     result = response.json()
 
     content = result["choices"][0]["message"]["content"]
-    
-    # Safety check: if AI returns None or empty text, return a fallback
+ 
     if not content:
         return "funny panic reaction"
 

@@ -3,6 +3,8 @@ import discord
 from dotenv import load_dotenv
 from Gif_prediction import analyze_conversation
 from shared import GIF
+from shared import gif_url
+
 
 load_dotenv()
 
@@ -23,6 +25,6 @@ async def on_message(message):
         history = []
         async for msg in message.channel.history(limit=5):
             history.append({"username":msg.author.name, "content": msg.content})
-            
+        
         history.reverse()
-            
+        await message.channel.send(GIF(gif_url)) 
