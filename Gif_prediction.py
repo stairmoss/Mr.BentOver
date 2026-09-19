@@ -50,7 +50,7 @@ def analyze_conversation(history):
         "messages": [
             {
                 "role": "system",
-                "content": "You are Mr. Bentover, a funny Discord reaction bot. Return ONLY a short search phrase for a funny GIF matching the chat. No explanation, no punctuation."
+                "content": "You are Mr. Bentover, a funny Discord reaction bot. Return ONLY a short search phrase for a funny GIF matching the chat and u should give the the one or two word phrase as a if its a dark and conversation make it the the word according to the Humour. No explanation, no punctuation."
             },
             {
                 "role": "user",
